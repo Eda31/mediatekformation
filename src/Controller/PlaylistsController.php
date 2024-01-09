@@ -68,9 +68,9 @@ class PlaylistsController extends AbstractController
             case "name":
                 $playlists = $this->playlistRepository->findAllOrderByName($ordre);
                 break;
-                case "nombre_formations":
-                    $playlists = $this->playlistRepository->findAllOrderByNombreFormations($ordre);
-                    break;
+            case "nombre_formations":
+                $playlists = $this->playlistRepository->findAllOrderByNombreFormations($ordre);
+                break;
             default :
                 $playlists = [];
         }
