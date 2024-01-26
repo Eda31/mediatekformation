@@ -108,7 +108,7 @@ class Playlist
     /**
      * @return Collection<int, string>
      */
-    public function getCategoriesPlaylist() : Collection
+    public function getCategoriesPlaylist(): Collection
     {
         $categories = new ArrayCollection();
         foreach ($this->formations as $formation) {
