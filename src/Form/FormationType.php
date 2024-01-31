@@ -32,7 +32,7 @@ class FormationType extends AbstractType
                 'class' => Playlist::class,
                 'choice_label' => 'name',
                 'multiple' => false,
-                'required' => false
+                'required' => true
             ])
             ->add('categories', EntityType::class, [
                 'class' => Categorie::class,
