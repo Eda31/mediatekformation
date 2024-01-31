@@ -28,6 +28,10 @@ class AdminFormationsControlleur extends AbstractController
      */
     private $categorieRepository;
     
+    /**
+     * @param FormationRepository $formationRepository
+     * @param CategorieRepository $categorieRepository
+     */
     public function __construct(FormationRepository $formationRepository, CategorieRepository $categorieRepository)
     {
         $this->formationRepository = $formationRepository;
@@ -35,7 +39,7 @@ class AdminFormationsControlleur extends AbstractController
     }
     
     /**
-     * @Route("/admin", name="admin_formations")
+     * @Route("/admin", name="admin.formations")
      * @return Response
      */
     public function index(): Response
@@ -49,7 +53,7 @@ class AdminFormationsControlleur extends AbstractController
     }
 
     /**
-     * @Route("/admin/formations/tri/{champ}/{ordre}/{table}", name="admin_formations.sort")
+     * @Route("/admin/formations/tri/{champ}/{ordre}/{table}", name="admin.formations.sort")
      * @param type $champ
      * @param type $ordre
      * @param type $table
@@ -66,7 +70,7 @@ class AdminFormationsControlleur extends AbstractController
     }
     
     /**
-     * @Route("/admin/formations/recherche/{champ}/{table}", name="admin_formations.findallcontain")
+     * @Route("/admin/formations/recherche/{champ}/{table}", name="admin.formations.findallcontain")
      * @param type $champ
      * @param Request $request
      * @param type $table
@@ -86,7 +90,7 @@ class AdminFormationsControlleur extends AbstractController
     }
     
     /**
-     * @Route("/admin/formations/formation/{id}", name="admin_formations.showone")
+     * @Route("/admin/formations/formation/{id}", name="admin.formations.showone")
      * @param type $id
      * @return Response
      */
