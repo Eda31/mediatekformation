@@ -22,7 +22,7 @@ class Playlist
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\NotBlank(message="Le nom de la playlist ne peut pas être vide.")
+     * @Assert\NotBlank
      */
     private $name;
 

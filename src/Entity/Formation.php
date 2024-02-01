@@ -29,6 +29,7 @@ class Formation
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
+     * @Assert\NotBlank
      * @Assert\LessThanOrEqual("today", message="La date ne peut pas être postérieure à aujourd'hui.")
      */
     private $publishedAt;
@@ -42,7 +43,6 @@ class Formation
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank
      */
     private $description;
 
