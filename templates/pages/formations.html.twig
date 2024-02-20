@@ -1,7 +1,7 @@
 {% extends "basefront.html.twig" %}
 {% block body %}
     <table class="table table-striped">
-        <caption>Listes des Formations</caption>
+        <caption>Liste des Formations</caption>
         <thead>
             <tr>
                 <th class="text-left align-top" scope="col">
@@ -43,8 +43,8 @@
                                     value="{{ categorie.id }}">{{ categorie.name }}
                                 </option>
                             {% endfor %}
-                        </select>
-                    </form>
+                        </select>                    
+                    </form>            
                 </th>
                 <th class="text-center align-top" scope="col">
                     date<br />
@@ -65,7 +65,7 @@
                         </h5>
                     </td>
                     <td class="text-left">
-                        {{ formation.playlist.name }}
+                        {{ formation.playlist.name }}                  
                     </td>                    
                     <td class="text-left">
                         {% for categorie in formation.categories %}
@@ -78,7 +78,7 @@
                     <td class="text-center">
                         {% if formation.miniature %}
                             <a href="{{ path('formations.showone', {id:formation.id}) }}">
-                                <img src="{{ formation.miniature }}" alt="image formation">
+                                <img src="{{ formation.miniature }}" alt="miniature des formations">
                             </a>
                         {% endif %}
                     </td>

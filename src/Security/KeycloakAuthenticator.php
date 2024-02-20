@@ -28,13 +28,15 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
     private $router;
     
     public function __construct(ClientRegistry $clientRegistry,
-            EntityManagerInterface $entityManager, RouterInterface $router)
+            EntityManagerInterface $entityManager,
+            RouterInterface $router)
     {
         $this->clientRegistry = $clientRegistry;
         $this->entityManager = $entityManager;
         $this->router = $router;
     }
     
+    // Méthode appelée en cas d'échec d'authentification
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         return new RedirectResponse(
@@ -42,13 +44,14 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
             Response::HTTP_TEMPORARY_REDIRECT
         );
     }
-
     
+    // Méthode pour déterminer si cet authenticateur doit être utilisé pour la requête en cours
     public function supports(Request $request): bool
     {
         return $request->attributes->get('_route') === 'oauth_check';
     }
     
+    // Méthode pour créer le passeport de l'utilisateur basé sur le jeton OAuth2
     public function authenticate(Request $request): Passport
     {
         $client = $this->clientRegistry->getClient('keycloak');
@@ -84,17 +87,19 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
                 $user->setRoles(['ROLE_ADMIN']);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
-                return $user;
+                return $user; // l'utilisateur récupéré ou créé
             })
         );
     }
     
+    // Méthode appelée en cas de succès de l'authentification
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         $targetUrl = $this->router->generate('admin.formations');
         return new RedirectResponse($targetUrl);
     }
-
+    
+    // Méthode appelée en cas d'échec de l'authentification
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         $message = strtr($exception->getMessageKey(), $exception->getMessageData());

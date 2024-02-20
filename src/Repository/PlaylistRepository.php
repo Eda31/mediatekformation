@@ -56,7 +56,7 @@ class PlaylistRepository extends ServiceEntityRepository
     }
     
     /**
-     * Trie par rapport le nombre de formations
+     * Trie par rapport aux nombres de formations
      * @param type $ordre
      * @return array
      */

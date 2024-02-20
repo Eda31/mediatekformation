@@ -28,9 +28,7 @@ class Formation
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\DateTime
-     * @Assert\NotBlank
-     * @Assert\LessThanOrEqual("today", message="La date ne peut pas être postérieure à aujourd'hui.")
+     * @Assert\LessThanOrEqual("now", message="La date ne peut pas être postérieure à aujourd'hui.")
      */
     private $publishedAt;
 
@@ -54,7 +52,7 @@ class Formation
     private $videoId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Playlist::class, inversedBy="formations")
+     * @ORM\ManyToOne(targetEntity=Playlist::class, inversedBy="formations", cascade={"persist"})
      */
     private $playlist;
 
