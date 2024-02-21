@@ -43,8 +43,9 @@
                                     value="{{ categorie.id }}">{{ categorie.name }}
                                 </option>
                             {% endfor %}
-                        </select>                    
-                    </form>            
+                        </select>
+                        <input type="hidden" name="_token" value="{{ csrf_token('filtre_id') }}">
+                    </form>
                 </th>
                 <th class="text-center align-top" scope="col">
                     date<br />
