@@ -1,3 +1,4 @@
+Lien vers dépot d'origine : https://github.com/CNED-SLAM/mediatekformation
 # Mediatekformation
 ## Présentation
 Ce site, développé avec Symfony 5.4, permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
@@ -83,3 +84,17 @@ Le chemin des images (des 2 tailles) n'est pas mémorisé dans la BDD car il peu
 - Ouvrir une fenêtre de commandes en mode admin, se positionner dans le dossier du projet et taper "composer install" pour reconstituer le dossier vendor.<br>
 - Récupérer le fichier mediatekformation.sql en racine du projet et l'utiliser pour créer la BDD MySQL "mediatekformation" en root sans pwd (si vous voulez mettre un login/pwd d'accès, il faut le préciser dans le fichier ".env" en racine du projet).<br>
 - De préférence, ouvrir l'application dans un IDE professionnel. L'adresse pour la lancer est : http://localhost/mediatekformation/public/index.php<br>
+
+## Ajout d'une colonne et d'un trie
+Dans la page des playlists, ajouter une colonne pour afficher le nombre de formations par playlist et permettre le tri croissant et décroissant sur cette colonne.
+
+## Gérer les formations, les playlists et les catégories
+Créer une page back office pour lister les formations avec des options de suppression et de modification. La suppression d'une formation doit la retirer de la playlist associée. Intégration des tris et filtres du front office. Ajout d'un formulaire de saisie contrôlée avec date non postérieure au jour. Le formulaire de modification est prérempli au clic.
+Établir une page back office pour lister les playlists avec des options de suppression et de modification. La suppression d'une playlist est possible uniquement si aucune formation n'y est rattachée. Intégration des tris et filtres du front office. Ajout d'un formulaire de saisie contrôlée pour le nom de la playlist. Le formulaire de modification est prérempli avec la liste des formations attachées.
+Créer une page pour lister les catégories avec une option de suppression. La suppression des catégories est possible si elles ne sont pas rattachées à une formation. Intégration d'un mini formulaire sur la même page pour ajouter une nouvelle catégorie de manière contrôlée.
+
+## Authentification avec Keycloak
+Mettre en place une authentification pour limiter l'accès au back office à un seul profil administrateur via Keycloak. Ajouter la possibilité de se déconnecter depuis toutes les pages avec un lien dédié.
+
+## Les tests
+Tout les tests ont été fait, les tests unitaires, les tests d'intégration sur les règles de validation, les tests d'intégration sur les Repository, les tests fonctionnels et ainsi que les tests de compatibilité
