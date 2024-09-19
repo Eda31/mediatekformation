@@ -15,7 +15,7 @@ class Formation
     /**
      * Début de chemin vers les images
      */
-    private const cheminImage = "https://i.ytimg.com/vi/";
+    private const CHEMIN_IMAGE = "https://i.ytimg.com/vi/";
         
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -61,17 +61,17 @@ class Formation
     public function setPublishedAt(?\DateTimeInterface $publishedAt): static
     {
         $this->publishedAt = $publishedAt;
-
         return $this;
     }
 
-    public function getPublishedAtString(): string {
-        if($this->publishedAt == null){
+    public function getPublishedAtString(): string
+    {
+        if ($this->publishedAt == null) {
             return "";
         }
-        return $this->publishedAt->format('d/m/Y');     
-    }      
-    
+        return $this->publishedAt->format('d/m/Y');
+    }
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -80,7 +80,6 @@ class Formation
     public function setTitle(?string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -92,7 +91,6 @@ class Formation
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -104,18 +102,17 @@ class Formation
     public function setVideoId(?string $videoId): static
     {
         $this->videoId = $videoId;
-
         return $this;
     }
 
     public function getMiniature(): ?string
     {
-        return self::cheminImage.$this->videoId."/default.jpg";
+        return self::CHEMIN_IMAGE.$this->videoId."/default.jpg";
     }
 
     public function getPicture(): ?string
     {
-        return self::cheminImage.$this->videoId."/hqdefault.jpg";
+        return self::CHEMIN_IMAGE.$this->videoId."/hqdefault.jpg";
     }
     
     public function getPlaylist(): ?playlist

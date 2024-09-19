@@ -1,6 +1,7 @@
 {% extends "basefront.html.twig" %}
 {% block body %}
     <table class="table table-striped">
+        <caption>Tableau des playlists</caption>
         <thead>
             <tr>
                 <th class="text-left align-top" scope="col">
@@ -14,7 +15,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token('filtre_name') }}">
                             <button type="submit" class="btn btn-info mb-2 btn-sm">filtrer</button>
                         </div>
-                    </form>                    
+                    </form>
                 </th>
                 <th class="text-left align-top" scope="col">
                     catégories
@@ -29,12 +30,12 @@
                                     value="{{ categorie.id }}">{{ categorie.name }}
                                 </option>
                             {% endfor %}
-                        </select>                    
-                    </form>            
+                        </select>
+                    </form>
                 </th>
                 <th class="text-center align-top" scope="col">
                     &nbsp;
-                </th>				
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -46,20 +47,20 @@
                             <h5 class="text-info">
                                 {{ playlists[k].name }}
                             </h5>
-                        </td>                 
+                        </td>
                         <td class="text-left">
                             {% set categories = playlists[k].categoriesplaylist %}
                             {% if categories|length > 0  %}
                                 {% for c in 0..categories|length-1 %}
-                                    &nbsp;{{ categories[c] }}                                  
+                                    &nbsp;{{ categories[c] }}
                                 {% endfor %}
                             {% endif %}
-                        </td>            					
+                        </td>
                         <td class="text-center">
                             <a href="{{ path('playlists.showone', {id:playlists[k].id}) }}" class="btn btn-secondary">Voir détail</a>
-                        </td> 					
+                        </td>
                     </tr>
-                {% endfor %}	
+                {% endfor %}
             {% endif %}
         </tbody>
     </table>
