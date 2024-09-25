@@ -82,7 +82,7 @@ class Playlist
 
     public function removeFormation(Formation $formation): static
     {
-        if ($this->formations->removeElement($formation) && $formation->getPlaylist() === $this) {
+        if ($this->formations->removeElement($formation) && ($formation->getPlaylist() === $this)) {
             // set the owning side to null (unless already changed)
             $formation->setPlaylist(null);
         }
@@ -106,5 +106,15 @@ class Playlist
         }
         return $categories;
     }
-        
+    
+    ### code ajouté
+    /**
+     * @return int
+     */
+    public function getNombreFormations(): int
+    {
+        /** @var Collection<Formations> $formations */
+        $formations = $this->getFormations();
+        return $formations->count();
+    }
 }

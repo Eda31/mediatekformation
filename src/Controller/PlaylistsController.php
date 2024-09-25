@@ -11,13 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Description of PlaylistsController
- *
  * @author emds
  */
 class PlaylistsController extends AbstractController
 {
     /**
-     * Chemin vers le fichier Twig pour les formations.
+     * @const page playlists
      */
     private const PAGE_PLAYLISTS = "pages/playlists.html.twig";
     
@@ -37,8 +36,8 @@ class PlaylistsController extends AbstractController
     private $categorieRepository;
     
     public function __construct(PlaylistRepository $playlistRepository,
-        CategorieRepository $categorieRepository,
-        FormationRepository $formationRespository)
+            CategorieRepository $categorieRepository,
+            FormationRepository $formationRespository)
     {
         $this->playlistRepository = $playlistRepository;
         $this->categorieRepository = $categorieRepository;
@@ -67,11 +66,14 @@ class PlaylistsController extends AbstractController
             case "name":
                 $playlists = $this->playlistRepository->findAllOrderByName($ordre);
                 break;
-            default :
+            case "nombre_formations":
+                $playlists = $this->playlistRepository->findAllOrderByNombreFormations($ordre);
                 break;
+            default :
+                $playlists = [];
         }
         $categories = $this->categorieRepository->findAll();
-        return $this->render("pages/playlists.html.twig", [
+        return $this->render(self::PAGE_PLAYLISTS, [
             'playlists' => $playlists,
             'categories' => $categories
         ]);
@@ -97,10 +99,15 @@ class PlaylistsController extends AbstractController
         $playlist = $this->playlistRepository->find($id);
         $playlistCategories = $this->categorieRepository->findAllForOnePlaylist($id);
         $playlistFormations = $this->formationRepository->findAllForOnePlaylist($id);
-        return $this->render(self::PAGE_PLAYLISTS, [
+        
+        // Récupération du nombre de formations
+        $nombreFormations = $playlist->getNombreFormations();
+        
+        return $this->render("pages/playlist.html.twig", [
             'playlist' => $playlist,
             'playlistcategories' => $playlistCategories,
-            'playlistformations' => $playlistFormations
+            'playlistformations' => $playlistFormations,
+            'nombreFormations' => $nombreFormations
         ]);
     }
     

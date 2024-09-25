@@ -42,6 +42,7 @@ class Categorie
     public function setName(?string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -59,6 +60,7 @@ class Categorie
             $this->formations->add($formation);
             $formation->addCategory($this);
         }
+
         return $this;
     }
 
@@ -67,6 +69,7 @@ class Categorie
         if ($this->formations->removeElement($formation)) {
             $formation->removeCategory($this);
         }
+
         return $this;
     }
 }

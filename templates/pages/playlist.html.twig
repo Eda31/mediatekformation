@@ -3,6 +3,8 @@
     <div class="row mt-3">
         <div class="col">
             <h4 class="text-info mt-5">{{ playlist.name }}</h4>
+            <!-- Affichage du nombre de formations -->
+            <p><strong>Nombre de formations : </strong>{{ playlist.getNombreFormations() }}</p>
             <strong>catégories : </strong>
                 <!-- boucle pour afficher les catégories -->
                 {% set anccategorie = '' %}
@@ -22,10 +24,10 @@
                             <a href="{{ path('formations.showone', {id:formation.id}) }}">
                                 <img src="{{ formation.miniature }}" alt="">
                             </a>
-                        {% endif %}  
+                        {% endif %}
                     </div>
                     <div class="col d-flex align-items-center">
-                        <a href="{{ path('formations.showone', {id:formation.id}) }}" 
+                        <a href="{{ path('formations.showone', {id:formation.id}) }}"
                            class="link-secondary text-decoration-none">
                             {{ formation.title }}
                         </a>
@@ -33,6 +35,5 @@
                 </div>
             {% endfor %}
         </div>
-        
     </div>
 {% endblock %}

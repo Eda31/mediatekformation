@@ -10,14 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Controleur des formations
- *
  * @author emds
  */
 class FormationsController extends AbstractController
 {
-
     /**
-     * Chemin vers le fichier Twig pour les formations.
+     * @const page formations
      */
     private const PAGE_FORMATIONS = "pages/formations.html.twig";
     
@@ -77,9 +75,9 @@ class FormationsController extends AbstractController
     public function showOne($id): Response
     {
         $formation = $this->formationRepository->find($id);
-        return $this->render("pages/formation.html.twig", [
+        return $this->render(self::PAGE_FORMATIONS, [
             'formation' => $formation
         ]);
     }
-
+    
 }

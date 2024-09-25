@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Description of AccueilController
+ *
  * @author emds
  */
 class AccueilController extends AbstractController
@@ -34,7 +35,7 @@ class AccueilController extends AbstractController
             'formations' => $formations
         ]);
     }
-
+    
     #[Route('/cgu', name: 'cgu')]
     public function cgu(): Response
     {

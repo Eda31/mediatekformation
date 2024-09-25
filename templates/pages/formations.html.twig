@@ -37,7 +37,7 @@
                             <option value=""></option>
                             {% for categorie in categories %}
                                 <option 
-                                    {% if valeur|default and valeur==categorie.id %} 
+                                    {% if valeur|default and valeur==categorie.id %}
                                         selected
                                     {% endif %} 
                                     value="{{ categorie.id }}">{{ categorie.name }}
@@ -49,7 +49,7 @@
                 <th class="text-center align-top" scope="col">
                     date<br />
                     <a href="{{ path('formations.sort', {champ:'publishedAt', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('formations.sort', {champ:'publishedAt', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>                    
+                    <a href="{{ path('formations.sort', {champ:'publishedAt', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
                 </th>
                 <th class="text-center align-top" scope="col">
                     &nbsp;

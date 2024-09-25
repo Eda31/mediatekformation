@@ -61,6 +61,7 @@ class Formation
     public function setPublishedAt(?\DateTimeInterface $publishedAt): static
     {
         $this->publishedAt = $publishedAt;
+
         return $this;
     }
 
@@ -71,7 +72,7 @@ class Formation
         }
         return $this->publishedAt->format('d/m/Y');
     }
-
+    
     public function getTitle(): ?string
     {
         return $this->title;
@@ -80,6 +81,7 @@ class Formation
     public function setTitle(?string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ class Formation
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -102,6 +105,7 @@ class Formation
     public function setVideoId(?string $videoId): static
     {
         $this->videoId = $videoId;
+
         return $this;
     }
 
