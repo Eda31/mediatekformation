@@ -1,0 +1,79 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    <p class="text-end">
+        <a href="{{ path('admin.formation.ajout') }}" class="btn btn-primary">
+            Ajouter une nouvelle formation
+        </a>
+    </p>
+    <table class="table table-striped">
+        <caption>Tableau des formations</caption>
+        <thead>
+            <tr>
+                <th class="text-left align-top" scope="col">
+                    Formation
+                    <a href="{{ path('admin.formations.sort', {champ:'title', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.formations.sort', {champ:'title', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form class="form-inline mt-1" method="POST" action="{{ path('admin.formations.findallcontain', {champ:'title'}) }}">
+                        <div class="form-group mr-1 mb-2">
+                            <input type="text" class="sm" name="recherche" 
+                                   value="{% if valeur|default and not table|default %}{{ valeur }}{% endif %}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('filtre_title') }}">
+                            <button type="submit" class="btn btn-info mb-2 btn-sm">filtrer</button>
+                        </div>
+                    </form>
+                </th>
+                <th class="text-left align-top" scope="col">
+                    Playlist
+                    <a href="{{ path('admin.formations.sort', {table:'playlist', champ:'name', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.formations.sort', {table:'playlist', champ:'name', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form class="form-inline mt-1" method="POST" action="{{ path('admin.formations.findallcontain', {champ:'name', table:'playlist'}) }}">
+                        <div class="form-group mr-1 mb-2">
+                            <input type="text" class="sm" name="recherche" 
+                                   value="{% if valeur|default and table|default and table=='playlist' %}{{ valeur }}{% endif %}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('filtre_name') }}">
+                            <button type="submit" class="btn btn-info mb-2 btn-sm">filtrer</button>
+                        </div>
+                    </form>
+                </th>
+                <th class="text-left align-top" scope="col">
+                    Catégories
+                </th>
+                <th class="text-center align-top" scope="col">
+                    Date
+                    <a href="{{ path('admin.formations.sort', {champ:'publishedAt', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.formations.sort', {champ:'publishedAt', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                </th>
+                <th class="text-center align-top" scope="col">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+                <tr class="align-middle">
+                    <td>
+                        <h5 class="text-info">
+                            {{ formation.title }}
+                        </h5>
+                    </td>
+                    <td class="text-left">
+                        {{ formation.playlist.name }}
+                    </td>
+                    <td class="text-left">
+                        {% for categorie in formation.categories %}
+                            {{ categorie.name }}<br />
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">
+                        {{ formation.publishedatstring }}
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ path('admin.formation.edit', {id:formation.id}) }}" class="btn btn-secondary">Éditer</a>
+                        <a href="{{ path('admin.formation.suppr', {id:formation.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ formation.title }} ?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
