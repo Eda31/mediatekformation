@@ -1,0 +1,76 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    <p class="text-end">
+        <a href="{{ path('admin.playlist.ajout') }}" class="btn btn-primary">
+            Ajouter une nouvelle playlist
+        </a>
+    </p>
+    <table class="table table-striped">
+        <caption>Listes des Playlists</caption>
+        <thead>
+            <tr>
+                <th class="text-left align-top" scope="col">
+                    playlist<br />
+                    <a href="{{ path('admin.playlists.sort', {champ:'name', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.playlists.sort', {champ:'name', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form class="form-inline mt-1" method="POST" action="{{ path('admin.playlists.findallcontain', {champ:'name'}) }}">
+                        <div class="form-group mr-1 mb-2">
+                            <input type="text" class="sm" name="recherche" 
+                                   value="{% if valeur|default and not table|default %}{{ valeur }}{% endif %}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('filtre_name') }}">
+                            <button type="submit" class="btn btn-info mb-2 btn-sm">filtrer</button>
+                        </div>
+                    </form>
+                </th>
+                <th class="text-left align-top" scope="col">
+                    catégories<br />
+                    <form class="form-inline mt-1" method="POST" action="{{ path('admin.playlists.findallcontain', {champ:'id', table:'categories'}) }}">
+                        <select class="form-select form-select-sm" name="recherche" id="recherche" onchange="this.form.submit()">
+                            <option value=""></option>
+                            {% for categorie in categories %}
+                                <option 
+                                    {% if valeur|default and valeur==categorie.id %} 
+                                        selected
+                                    {% endif %} 
+                                    value="{{ categorie.id }}">{{ categorie.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </th>
+                <th class="text-left align-top" scope="col">
+                    Nombres de Formations<br />
+                    <a href="{{ path('admin.playlists.sort', {champ:'nombre_formations', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.playlists.sort', {champ:'nombre_formations', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                </th>
+                <th>
+                    Actions<br /><br /><br /><br /><br />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- boucle sur les playlists -->
+            {% for playlist in playlists %}
+                <tr>
+                    <td>
+                        <h5 class="text-primary">
+                            {{ playlist.name }}
+                        </h5>
+                    </td>
+                    <td class="text-left">
+                        {% for categorie in playlist.getCategoriesPlaylist() %}
+                            {{ categorie }}<br />
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">
+                            {{ playlist.getNombreFormations() }}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin.playlist.edit', {id:playlist.id}) }}" class='btn btn-secondary'>Editer</a>
+                        <a href="{{ path('admin.playlist.suppr', {id:playlist.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ playlist.name }} ?')" class='btn btn-danger'>Supprimer</a>
+                    </td>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
