@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -23,6 +24,10 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\LessThanOrEqual(
+        value: "today",
+        message: "La date ne peut pas être postérieure à aujourd'hui."
+    )]
     private ?\DateTimeInterface $publishedAt = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -34,9 +39,9 @@ class Formation
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $videoId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\ManyToOne(inversedBy: 'formations', cascade: ['persist'])]
     private ?Playlist $playlist = null;
-
+    
     /**
      * @var Collection<int, Categorie>
      */
