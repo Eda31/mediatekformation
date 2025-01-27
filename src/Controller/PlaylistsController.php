@@ -58,7 +58,13 @@ class PlaylistsController extends AbstractController
             'categories' => $categories
         ]);
     }
-
+    
+    /**
+     * pour trier les playlists dans l'ordre souhaité
+     * @param type $champ
+     * @param type $ordre
+     * @return Response
+     */
     #[Route('/playlists/tri/{champ}/{ordre}', name: 'playlists.sort')]
     public function sort($champ, $ordre): Response
     {
@@ -78,7 +84,14 @@ class PlaylistsController extends AbstractController
             'categories' => $categories
         ]);
     }
-
+    
+    /**
+     * pour rechercher les playlists souhaité
+     * @param type $champ
+     * @param Request $request
+     * @param type $table
+     * @return Response
+     */
     #[Route('/playlists/recherche/{champ}/{table}', name: 'playlists.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response
     {
@@ -92,7 +105,12 @@ class PlaylistsController extends AbstractController
             'table' => $table
         ]);
     }
-
+    
+    /**
+     * pour montrer une playlist souhaité
+     * @param type $id
+     * @return Response
+     */
     #[Route('/playlists/playlist/{id}', name: 'playlists.showone')]
     public function showOne($id): Response
     {

@@ -128,7 +128,12 @@ class AdminPlaylistsController extends AbstractController
             'formplaylist' => $formPlaylist->createView()
         ]);
     }
-    
+    /**
+     * pour trier les playlists dans l'ordre souhaité
+     * @param type $champ
+     * @param type $ordre
+     * @return Response
+     */
     #[Route('/admin/playlists/tri/{champ}/{ordre}', name: 'admin.playlists.sort')]
     public function sort($champ, $ordre): Response
     {
@@ -149,6 +154,13 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
     
+    /**
+     * pour rechercher les playlists souhaité
+     * @param type $champ
+     * @param Request $request
+     * @param type $table
+     * @return Response
+     */
     #[Route('/admin/playlists/recherche/{champ}/{table}', name: 'admin.playlists.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response
     {
