@@ -10,7 +10,7 @@
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: mediatekformationatelier1.go.yj.fr
+        server: 185.221.182.190
         server-dir: /public_html/mediatekformation/
         username: fkejjhbv
         password: ${{ secrets.ftp_password }}
