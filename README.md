@@ -84,3 +84,14 @@ Le chemin des images (des 2 tailles) n'est pas mémorisé dans la BDD car il peu
 - Dans phpMyAdmin, se connecter à MySQL en root sans mot de passe et créer la BDD 'mediatekformation'.<br>
 - Récupérer le fichier mediatekformation.sql en racine du projet et l'utiliser pour remplir la BDD (si vous voulez mettre un login/pwd d'accès, il faut créer un utilisateur, lui donner les droits sur la BDD et il faut le préciser dans le fichier ".env" en racine du projet).<br>
 - De préférence, ouvrir l'application dans un IDE professionnel. L'adresse pour la lancer est : http://localhost/mediatekformation/public/index.php<br>
+
+## Ajout d'une colonne et d'un trie
+Dans la page des playlists, ajouter une colonne pour afficher le nombre de formations par playlist et permettre le tri croissant et décroissant sur cette colonne.
+
+## Gérer les formations, les playlists et les catégories
+Créer une page back office pour lister les formations avec des options de suppression et de modification. La suppression d'une formation doit la retirer de la playlist associée. Intégration des tris et filtres du front office. Ajout d'un formulaire de saisie contrôlée avec date non postérieure au jour. Le formulaire de modification est prérempli au clic.
+Établir une page back office pour lister les playlists avec des options de suppression et de modification. La suppression d'une playlist est possible uniquement si aucune formation n'y est rattachée. Intégration des tris et filtres du front office. Ajout d'un formulaire de saisie contrôlée pour le nom de la playlist. Le formulaire de modification est prérempli avec la liste des formations attachées.
+Créer une page pour lister les catégories avec une option de suppression. La suppression des catégories est possible si elles ne sont pas rattachées à une formation. Intégration d'un mini formulaire sur la même page pour ajouter une nouvelle catégorie de manière contrôlée.
+
+## Les tests
+Tout les tests ont été fait, les tests unitaires, les tests d'intégration sur les règles de validation, les tests d'intégration sur les Repository, les tests fonctionnels et ainsi que les tests de compatibilit
